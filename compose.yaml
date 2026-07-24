@@ -1,0 +1,12 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: quicklist
+      POSTGRES_PASSWORD: quicklist_dev_password
+      POSTGRES_DB: quicklist
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
