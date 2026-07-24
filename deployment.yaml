@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quicklist
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: quicklist
+  template:
+    metadata:
+      labels:
+        app: quicklist
+    spec:
+      containers:
+        - name: quicklist
+          image: <your-acr-name>.azurecr.io/quicklist:day10
+          ports:
+            - containerPort: 5000
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5000
