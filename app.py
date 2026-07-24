@@ -93,7 +93,7 @@ def health():
 
 
 @app.route("/items", methods=["GET"])
-def list_items()
+def list_items():
     db = get_db()
     rows = db.execute("SELECT * FROM items ORDER BY id DESC").fetchall()
     return jsonify([dict(row) for row in rows])
