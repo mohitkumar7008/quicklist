@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>QuickList</title>
+  <style>
+    body { font-family: "Segoe UI", Arial, sans-serif; background:#f7f9fc; color:#1c2430; max-width:640px; margin:40px auto; padding:0 20px; }
+    h1 { color:#0b2340; }
+    form { background:#fff; border:1px solid #d7dee6; border-radius:8px; padding:16px; margin-bottom:24px; }
+    input, textarea { width:100%; box-sizing:border-box; padding:8px; margin-bottom:8px; border:1px solid #b9cbdb; border-radius:5px; font-size:14px; }
+    button { background:#1d5c8a; color:#fff; border:none; padding:8px 16px; border-radius:5px; cursor:pointer; font-size:14px; }
+    button:hover { background:#12507f; }
+    .item { background:#fff; border:1px solid #d7dee6; border-radius:8px; padding:12px 16px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; }
+    .item h3 { margin:0 0 4px 0; color:#0b2340; }
+    .item p { margin:0; color:#475569; font-size:13.5px; }
+    .del-btn { background:#8a2f2f; }
+    .del-btn:hover { background:#6e2525; }
+    .empty { color:#7d93a8; font-style:italic; }
+  </style>
+</head>
+<body>
+  <h1>QuickList</h1>
+  <form action="/add" method="post">
+    <input type="text" name="title" placeholder="Title" required>
+    <textarea name="description" placeholder="Description (optional)" rows="2"></textarea>
+    <button type="submit">Add item</button>
+  </form>
+
+  {% if items %}
+    {% for item in items %}
+    <div class="item">
+      <div>
+        <h3>{{ item['title'] }}</h3>
+        <p>{{ item['description'] }}</p>
+      </div>
+      <form action="/delete/{{ item['id'] }}" method="post">
+        <button type="submit" class="del-btn">Delete</button>
+      </form>
+    </div>
+    {% endfor %}
+  {% else %}
+    <p class="empty">No items yet -- add your first one above.</p>
+  {% endif %}
+</body>
+</html>
